@@ -16,27 +16,27 @@ $ composer require "deofly/laravel-ext" -vvv
 Then in your `config/app.php` add this line to providers array:
 ```php
 Jacobcyl\AliOSS\AliOssServiceProvider::class,
-Jacobcyl\AliOSS\AliOssServiceProvider::class
+Overtrue\LaravelFilesystem\Cos\CosStorageServiceProvider::class,
 ```
 
 ## Configuration for OSS
 Add the following in app/filesystems.php:
 ```php
 'disks'=>[
-    ...
-    'oss' => [
-            'driver'        => 'oss',
-            'access_id'     => '<Your Aliyun OSS AccessKeyId>',
-            'access_key'    => '<Your Aliyun OSS AccessKeySecret>',
-            'bucket'        => '<OSS bucket name>',
-            'endpoint'      => '<the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com | custom domain, E.g:img.abc.com>', // OSS 外网节点或自定义外部域名
-            //'endpoint_internal' => '<internal endpoint [OSS内网节点] 如：oss-cn-shenzhen-internal.aliyuncs.com>', // v2.0.4 新增配置属性，如果为空，则默认使用 endpoint 配置(由于内网上传有点小问题未解决，请大家暂时不要使用内网节点上传，正在与阿里技术沟通中)
-            'cdnDomain'     => '<CDN domain, cdn域名>', // 如果isCName为true, getUrl会判断cdnDomain是否设定来决定返回的url，如果cdnDomain未设置，则使用endpoint来生成url，否则使用cdn
-            'ssl'           => <true|false> // true to use 'https://' and false to use 'http://'. default is false,
-            'isCName'       => <true|false> // 是否使用自定义域名,true: 则Storage.url()会使用自定义的cdn或域名生成文件url， false: 则使用外部节点生成url
-            'debug'         => <true|false>
-    ],
-    ...
+...
+'oss' => [
+'driver'        => 'oss',
+'access_id'     => '<Your Aliyun OSS AccessKeyId>',
+'access_key'    => '<Your Aliyun OSS AccessKeySecret>',
+'bucket'        => '<OSS bucket name>',
+'endpoint'      => '<the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com | custom domain, E.g:img.abc.com>', // OSS 外网节点或自定义外部域名
+//'endpoint_internal' => '<internal endpoint [OSS内网节点] 如：oss-cn-shenzhen-internal.aliyuncs.com>', // v2.0.4 新增配置属性，如果为空，则默认使用 endpoint 配置(由于内网上传有点小问题未解决，请大家暂时不要使用内网节点上传，正在与阿里技术沟通中)
+'cdnDomain'     => '<CDN domain, cdn域名>', // 如果isCName为true, getUrl会判断cdnDomain是否设定来决定返回的url，如果cdnDomain未设置，则使用endpoint来生成url，否则使用cdn
+'ssl'           => <true|false> // true to use 'https://' and false to use 'http://'. default is false,
+'isCName'       => <true|false> // 是否使用自定义域名,true: 则Storage.url()会使用自定义的cdn或域名生成文件url， false: 则使用外部节点生成url
+'debug'         => <true|false>
+],
+...
 ]
 ```
 Then set the default driver in app/filesystems.php:
@@ -100,31 +100,31 @@ More development detail see [Aliyun OSS DOC](https://help.aliyun.com/document_de
 ## Configuration for COS
 
 1. Add a new disk to your `config/filesystems.php` config:
- ```php
- <?php
+```php
+<?php
 
- return [
-    'disks' => [
-        //...
-        'cos' => [
-         'driver' => 'cos',
-        'region'          => env('COS_REGION', 'ap-guangzhou'),
-        'credentials'     => [
-            'appId'     => env('COS_APP_ID'),
-            'secretId'  => env('COS_SECRET_ID'),
-            'secretKey' => env('COS_SECRET_KEY'),
-        ],
-        'timeout'         => env('COS_TIMEOUT', 60),
-        'connect_timeout' => env('COS_CONNECT_TIMEOUT', 60),
-        'bucket'          => env('COS_BUCKET'),
-        'cdn'             => env('COS_CDN'),
-        'scheme'          => env('COS_SCHEME', 'https'),
-        'read_from_cdn'   => env('COS_READ_FROM_CDN', false),
-        ],
-        //...
-     ]
- ];
- ```
+return [
+'disks' => [
+//...
+'cos' => [
+'driver' => 'cos',
+'region'          => env('COS_REGION', 'ap-guangzhou'),
+'credentials'     => [
+'appId'     => env('COS_APP_ID'),
+'secretId'  => env('COS_SECRET_ID'),
+'secretKey' => env('COS_SECRET_KEY'),
+],
+'timeout'         => env('COS_TIMEOUT', 60),
+'connect_timeout' => env('COS_CONNECT_TIMEOUT', 60),
+'bucket'          => env('COS_BUCKET'),
+'cdn'             => env('COS_CDN'),
+'scheme'          => env('COS_SCHEME', 'https'),
+'read_from_cdn'   => env('COS_READ_FROM_CDN', false),
+],
+//...
+]
+];
+```
 
 # Usage
 
