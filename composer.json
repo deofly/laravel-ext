@@ -1,0 +1,35 @@
+{
+    "name": "deofly/laravel-ext",
+    "description": "Common laravel extensions",
+    "type": "library",
+    "keywords": ["laravel", "extension", "cos", "oss"],
+    "homepage": "https://github.com/deofly/laravel-ext",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "deofly",
+            "email": "sunkai1911@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "league/flysystem": "^1.0",
+        "overtrue/flysystem-cos": "^2.0.0",
+        "aliyuncs/oss-sdk-php": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Overtrue\\LaravelFilesystem\\Cos\\": "src/cos/",
+            "Jacobcyl\\AliOSS\\": "src/oss/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Overtrue\\LaravelFilesystem\\Cos\\CosStorageServiceProvider",
+                "Jacobcyl\\AliOSS\\AliOssServiceProvider"
+            ]
+
+        }
+    }
+}
