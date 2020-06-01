@@ -1,29 +1,25 @@
-# Aliyun-oss-storage for Laravel 5+
-Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.    
-借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展
-## Inspired By
-- [thephpleague/flysystem-aws-s3-v2](https://github.com/thephpleague/flysystem-aws-s3-v2)
-- [apollopy/flysystem-aliyun-oss](https://github.com/apollopy/flysystem-aliyun-oss) 
+# Introduction
+
+1. [Ali Cloud OSS](https://aliyun.com/product/oss): 借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展.
+
+2. [Tencent Cloud COS](https://cloud.tencent.com/product/cos): 为Laravel提供COS存储支持.
 
 ## Require
 - Laravel 5+
 - cURL extension
 
-##Installation
-In order to install AliOSS-storage, just add
+## Installation
 
-    "jacobcyl/ali-oss-storage": "^2.1"
-
-to your composer.json. Then run `composer install` or `composer update`.  
-Or you can simply run below command to install:
-
-    "composer require jacobcyl/ali-oss-storage:^2.1"
-    
+```shell
+$ composer require "deofly/laravel-ext" -vvv
+```
 Then in your `config/app.php` add this line to providers array:
 ```php
 Jacobcyl\AliOSS\AliOssServiceProvider::class,
+Jacobcyl\AliOSS\AliOssServiceProvider::class
 ```
-## Configuration
+
+## Configuration for OSS
 Add the following in app/filesystems.php:
 ```php
 'disks'=>[
@@ -57,7 +53,7 @@ Or you can learn here:
 
 ```php
 use Illuminate\Support\Facades\Storage;
-```    
+```
 > Then You can use all APIs of laravel Storage
 
 ```php
@@ -98,31 +94,10 @@ Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jaco
 Storage::url('path/to/img.jpg') // get the file url
 ```
 
-## Documentation
 More development detail see [Aliyun OSS DOC](https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM)
-## License
-Source code is release under MIT license. Read LICENSE file for more information.
 
 
---------------------------------------------------------------
---------------------------------------------------------------
-
-
-# Laravel filesystem COS 
-
-[Tencent Cloud COS](https://cloud.tencent.com/product/cos) storage for Laravel based on [overtrue/flysystem-cos](https://github.com/overtrue/flysystem-cos).
-
-# Requirement
-
-- PHP >= 5.5.9
-
-# Installation
-
-```shell
-$ composer require "overtrue/laravel-filesystem-cos" -vvv
-```
-
-# Configuration
+## Configuration for COS
 
 1. Add a new disk to your `config/filesystems.php` config:
  ```php
@@ -183,12 +158,6 @@ $url = $disk->getUrl('folder/my_file.txt');
 ```
 
 [Full API documentation.](http://flysystem.thephpleague.com/api/)
-
-## PHP 扩展包开发
-
-> 想知道如何从零开始构建 PHP 扩展包？
->
-> 请关注我的实战课程，我会在此课程中分享一些扩展开发经验 —— [《PHP 扩展包实战教程 - 从入门到发布》](https://learnku.com/courses/creating-package)
 
 
 # License
